@@ -3,7 +3,7 @@ import socket
 HEADER = 64  #64 bytes -> Representa el tamaño de bytes del mensaje que vamos a recibir
 PORT = 5050
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "quit"
+DISCONNECT_MESSAGE = "QUIT"
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
@@ -29,7 +29,7 @@ def start():
             msg_data = input("Input data to send: ")
             send("DATA"+msg_data)
         elif msg == "HELP":
-            print("quit, DATA, HELO, NBUCK, DLBUCK, UPFILE, DNFILE DLFILE, SLIST, CLIST, CD, BK")
+            print("QUIT, DATA, HELO, NBUCK, DLBUCK, UPFILE, DNFILE, DLFILE, LIST, CD, BK")
         elif msg == "NBUCK":
             msg_nbuck = input("Name the bucket: ")
             send("NBUCK"+msg_nbuck)
@@ -44,12 +44,8 @@ def start():
             f = open(filename,"r")
             content = f.read()
             send("UPFILE"+filename+".,"+content)
-            f.close()
-        elif msg == "DLFILE":
-            print("hola")
-        elif msg == "LIST":
-            print("hola")                                                               
-        elif msg == "quit":
+            f.close()                                                             
+        elif msg == DISCONNECT_MESSAGE:
             send(msg)
             print("Disconnected from the server")
             break

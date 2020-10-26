@@ -8,7 +8,7 @@ PORT = 5050
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "quit"
+DISCONNECT_MESSAGE = "QUIT"
 
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,7 +29,7 @@ def handle_client(conn, addr):
                 connected = False
             elif msg == "HELO":
                 conn.send("100 OK".encode(FORMAT))
-            elif msg == "SLIST":
+            elif msg == "LIST":
                 strfiles = ""
                 for x in os.listdir('.'):
                     strfiles+=x+"\n"
